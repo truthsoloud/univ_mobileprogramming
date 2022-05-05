@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edt"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:text="전화번호" />
+
+    <TextView
+        android:id="@+id/phonenum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/edt"
+        android:layout_alignBaseline="@+id/edt"
+        android:text="000-0000-0000"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/cancelbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phonenum"
+        android:layout_alignRight="@+id/phonenum"
+        android:backgroundTint="#4CAF50"
+        android:text="취소"
+        android:textColor="#000000" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phonenum"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/cancelbtn"
+        android:backgroundTint="#4CAF50"
+        android:text="입력"
+        android:textColor="#000000" />
+
+</RelativeLayout>

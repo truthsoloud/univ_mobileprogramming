@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     ImageView imgV;
     MyTabFragment myFrags[] = new MyTabFragment[4];
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar bar = getSupportActionBar();
@@ -27,30 +26,36 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         tabDog=bar.newTab();
         tabDog.setIcon(R.drawable.icondog);
         tabDog.setTabListener(this);
+        tabDog.setTag("강아지");
         bar.addTab(tabDog);
 
         tabCat=bar.newTab();
         tabCat.setIcon(R.drawable.iconcat);
         tabCat.setTabListener(this);
+        tabDog.setTag("고양이");
         bar.addTab(tabCat);
 
         tabHam=bar.newTab();
         tabHam.setIcon(R.drawable.iconham);
         tabHam.setTabListener(this);
+        tabDog.setTag("햄스터");
         bar.addTab(tabHam);
 
         tabRabbit=bar.newTab();
         tabRabbit.setIcon(R.drawable.iconrabbit);
         tabRabbit.setTabListener(this);
+        tabDog.setTag("토끼");
         bar.addTab(tabRabbit);
     }
+
+    @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         MyTabFragment myTabFrag = null;
 
         if (myFrags[tab.getPosition()]==null) {
             myTabFrag=new MyTabFragment();
             Bundle data=new Bundle();
-            data.putString("tabName", tab.getText().toString());
+            data.putString("tabName", tab.toString());
             myTabFrag.setArguments(data);
             myFrags[tab.getPosition()]=myTabFrag;
         }
@@ -59,35 +64,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         ft.replace(android.R.id.content, myTabFrag);
     }
+
+    @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        MyTabFragment myTabFrag = null;
-
-        if (myFrags[tab.getPosition()]==null) {
-            myTabFrag=new MyTabFragment();
-            Bundle data=new Bundle();
-            data.putString("tabName", tab.getText().toString());
-            myTabFrag.setArguments(data);
-            myFrags[tab.getPosition()]=myTabFrag;
-        }
-        else
-            myTabFrag=myFrags[tab.getPosition()];
-
-        ft.replace(android.R.id.content, myTabFrag);
     }
+
+    @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        MyTabFragment myTabFrag = null;
-
-        if (myFrags[tab.getPosition()]==null) {
-            myTabFrag=new MyTabFragment();
-            Bundle data=new Bundle();
-            data.putString("tabName", tab.getText().toString());
-            myTabFrag.setArguments(data);
-            myFrags[tab.getPosition()]=myTabFrag;
-        }
-        else
-            myTabFrag=myFrags[tab.getPosition()];
-
-        ft.replace(android.R.id.content, myTabFrag);
     }
 
     public static class MyTabFragment extends androidx.fragment.app.Fragment {
@@ -100,17 +83,18 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             tabName=data.getString("tabName");
         }
 
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            View myView=inflater.inflate(R.layout.activity_main,null);
-            ImageView imgV=(ImageView)myView.findViewById(R.id.imgV);
+            View v=inflater.inflate(R.layout.activity_main,null);
+            ImageView imgV=(ImageView)v.findViewById(R.id.imgV);
 
             if (tabName=="강아지") imgV.setImageResource(R.drawable.dog);
             if (tabName=="고양이") imgV.setImageResource(R.drawable.cat);
             if (tabName=="햄스터") imgV.setImageResource(R.drawable.ham);
             if (tabName=="토끼") imgV.setImageResource(R.drawable.rabbit);
 
-            return myView;
+            return v;
         }
     }
 
